@@ -1,0 +1,68 @@
+// For format details, see https://aka.ms/vscode-remote/devcontainer.json
+{
+	"name": "Flutter-Dev-Remote-WS",
+	// "dockerFile": "Dockerfile",
+	"build": {
+		"dockerfile": "Dockerfile",
+		"args": {
+			// Android SDK
+			"ANDROID_SDK_TOOLS_VERSION": "6858069",
+			"ANDROID_PLATFORM_VERSION": "30",
+			"ANDROID_BUILD_TOOLS_VERSION": "30.0.0",
+			
+			// Flutter SDK
+			// Releases: https://flutter.dev/docs/development/tools/sdk/releases?tab=linux
+			// Channels: https://github.com/flutter/flutter/wiki/Flutter-build-release-channels						
+			"FLUTTER_CHANNEL":"beta",
+			"FLUTTER_VERSION":"1.25.0-8.1.pre",
+
+			// Set FLUTTER_WEB as "enable" for flutter web-server configuration.
+			// Check the links above for the needed channel and version that allows web builds.
+			"FLUTTER_WEB":"enable"
+		}
+	},
+
+	// Set *default* container specific settings.json values on container create.
+	"settings": {
+		"terminal.integrated.profiles.linux": {
+			"zsh (login)": {
+			  "path": "bash"
+			}
+			// "terminal.integrated.profiles.linux": {
+			// 	"zsh (login)": {
+			// 	  "path": "zsh",
+			// 	  "args": ["-l"]
+			// 	},
+			//   }		"terminal.integrated.shell.linux": "/bin/bash", //deprecated
+		}
+	},
+
+	// Add the IDs of extensions you want installed when the container is created.
+	"extensions": [
+		"dart-code.dart-code",
+		"dart-code.flutter",
+		// "docsmsft.docs-markdown",
+		// "docsmsft.docs-preview"
+
+	],
+
+	// Set container memory reservation and memory limits for the container
+	// IMPORTANT!
+	// - Docker Engine low memory might cause Gradle to fail attaching Debug with:
+	//   'Gradle build daemon disappeared unexpectedly' error message
+	//   To solve that, you have to update your resource docker preferences to allow more memory for the container
+	//   Recommended is 4G.
+	//   Reference: https://docs.docker.com/config/containers/resource_constraints/ 
+	// "runArgs": [
+	// 	"--memory-reservation=3g", 
+	// 	"--memory=4g"],
+
+	// Use 'postCreateCommand' to run commands after the container is created.
+	"postCreateCommand": "adb connect host.docker.internal:5555",
+
+	// Use 'forwardPorts' to make a list of ports inside the container available locally.
+	// "forwardPorts": [5000],
+	
+	// Uncomment to connect as a non-root user. See https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode"
+}
